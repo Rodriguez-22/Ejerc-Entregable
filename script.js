@@ -21,8 +21,18 @@ function addItemToDOM(itemText) {
     const list = document.getElementById('shoppingList');
     const listItem = document.createElement('li');
 
-    listItem.innerHTML = `<span>${itemText}</span> <button onclick="removeItem('${itemText}', this)">❌</button>`;
-    listItem.onclick = () => listItem.classList.toggle('checked');
+    const textSpan = document.createElement('span');
+    textSpan.textContent = itemText;
+
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = '❌';
+    deleteButton.onclick = (event) => {
+        removeItem(itemText, listItem);
+    };
+
+    listItem.appendChild(textSpan);
+    listItem.appendChild(deleteButton);
+    listItem.addEventListener('click', () => listItem.classList.toggle('checked'));
 
     list.appendChild(listItem);
 }
